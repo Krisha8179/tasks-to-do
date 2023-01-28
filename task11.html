@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>objects in local storage</title>
+</head>
+
+<body>
+    <center>
+        <h1 id="title">objects in local storage</h1>
+    </center>
+
+    <style media="screen">
+        h1 {
+            color : green;
+        }
+    </style>
+</body>
+<script type="text/javascript">
+    let myObj = {
+        name : "krish",
+        age : 25
+    };
+
+    let myObj1 = {
+        name : "kr1",
+        age : 30
+    }
+
+    let myobj_serialized = JSON.stringify(myObj);
+    let myobj_serialized1 = JSON.stringify(myObj1);
+
+    localStorage.setItem("myobj",myobj_serialized);
+    localStorage.setItem("myobj1",myobj_serialized1);
+
+    let myobj_deserialized = JSON.parse(localStorage.getItem("myobj"))
+    console.log(myobj_deserialized);
+
+</script>
+</html>
