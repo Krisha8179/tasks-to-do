@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lets scale the app to more users</title>
+
+</head>
+<body>
+    <form id="myForm">
+        <label for="name">Name</label>
+        <input type="text" id="name" >
+        <label for="email">Email</label>
+        <input type="text" id="email">
+        <label for="number">Phone Number</label>
+        <input type="text" id="number">
+        <input class="btn" type="submit" value="submit">
+    </form>
+    <ul id="users"></ul>
+    
+</body>
+<script>
+    const myForm = document.getElementById("myForm");
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const number = document.getElementById("number");
+    const submit = document.getElementsByClassName("btn");
+    const users = document.getElementById("users")
+
+    myForm.addEventListener("submit",onsubmit);
+    function onsubmit(e){
+        e.preventDefault();
+
+        const li = document.createElement("li");
+
+        let obj = {
+            name : name.value,
+            email : email.value,
+            number : number.value  
+
+        }
+
+        localStorage.setItem(email.value,JSON.stringify(obj));
+        
+        li.appendChild(document.createTextNode(`${obj.name}-${obj.email}-${obj.number}`));
+        const deleteBtn = document.createElement("input");
+        deleteBtn.type = "button";
+        deleteBtn.value = "delete";
+        deleteBtn.onclick = () =>{
+            localStorage.removeItem(obj.email);
+            users.removeChild(li);
+        }
+
+        const editBtn = document.createElement("input");
+        editBtn.type = "button";
+        editBtn.value = "edit";
+        editBtn.onclick = () =>{
+            localStorage.removeItem(obj.email);
+            users.removeChild(li);
+            name.value = obj.name;
+            email.value = obj.email;
+            number.value = obj.number;
+        }
+
+        
+        li.appendChild(deleteBtn);
+        li.appendChild(editBtn);
+        users.appendChild(li);
+
+        name.value='';
+        email.value='';
+        number.value='';
+
+        }
+        
+    
+    
+</script>
+</html>
